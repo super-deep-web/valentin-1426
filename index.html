@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorpresa Especial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-gradient-to-br from-pink-200 via-rose-200 to-pink-100 min-h-screen"
+  >
+    <div id="welcome-container" class="container mx-auto px-4 py-8 max-w-4xl">
+      <div
+        class="bg-pink-50 rounded-3xl shadow-2xl p-8 md:p-12 border-2 border-pink-200"
+      >
+        <div class="text-center mb-8">
+          <i class="ri-heart-fill text-red-500 text-6xl mb-4 animate-pulse"></i>
+          <h1
+            class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-600 mb-4"
+          >
+            Encuentra el Corazón
+          </h1>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 mb-6 border-2 border-pink-300">
+          <h2 class="text-2xl font-bold text-pink-600 mb-4 text-center">
+            ¿Cómo jugar?
+          </h2>
+          <div class="space-y-3 text-gray-700">
+            <p class="flex items-start gap-3">
+              <i
+                class="ri-number-1 text-pink-500 text-xl flex-shrink-0 mt-1"
+              ></i>
+              <span>Primero verás dónde está el corazón en las tarjetas</span>
+            </p>
+            <p class="flex items-start gap-3">
+              <i
+                class="ri-number-2 text-pink-500 text-xl flex-shrink-0 mt-1"
+              ></i>
+              <span>Las tarjetas se voltearán y comenzarán a moverse</span>
+            </p>
+            <p class="flex items-start gap-3">
+              <i
+                class="ri-number-3 text-pink-500 text-xl flex-shrink-0 mt-1"
+              ></i>
+              <span
+                >Cuando se detengan, elige la tarjeta donde crees que está el
+                corazón</span
+              >
+            </p>
+            <p class="flex items-start gap-3">
+              <i
+                class="ri-trophy-fill text-pink-500 text-xl flex-shrink-0 mt-1"
+              ></i>
+              <span
+                ><strong>Objetivo:</strong> Encuentra el corazón 5 veces para
+                ganar. Tienes 5 vidas</span
+              >
+            </p>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button
+            id="welcome-start-button"
+            class="bg-gradient-to-r from-pink-500 to-rose-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+          >
+            Comenzar Juego
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="game-container"
+      class="hidden container mx-auto px-4 py-8 max-w-4xl"
+    >
+      <div
+        class="bg-pink-50 rounded-3xl shadow-2xl p-8 md:p-12 border-2 border-pink-200"
+      >
+        <div class="text-center mb-8">
+          <h1
+            class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-600 mb-4"
+          >
+            Encuentra el Corazón
+          </h1>
+          <div class="flex justify-center gap-8 text-lg font-semibold">
+            <div class="flex items-center gap-2">
+              <div id="lives-container" class="flex gap-1">
+                <i class="ri-heart-fill text-red-500 text-2xl"></i>
+                <i class="ri-heart-fill text-red-500 text-2xl"></i>
+                <i class="ri-heart-fill text-red-500 text-2xl"></i>
+                <i class="ri-heart-fill text-red-500 text-2xl"></i>
+                <i class="ri-heart-fill text-red-500 text-2xl"></i>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="ri-trophy-fill text-yellow-500 text-2xl"></i>
+              <span id="wins">0</span> / 5
+            </div>
+          </div>
+        </div>
+
+        <div id="game-status" class="text-center mb-6 h-8">
+          <p class="text-lg font-medium text-gray-700"></p>
+        </div>
+
+        <div
+          id="cards-container"
+          class="relative flex justify-center gap-2 md:gap-8 mb-8 mx-auto"
+          style="max-width: 500px; height: 200px"
+        >
+          <div class="card-wrapper absolute" style="left: 0" data-position="0">
+            <div
+              class="card w-24 h-36 md:w-40 md:h-56 bg-white rounded-2xl cursor-pointer transform transition-all hover:scale-105 flex items-center justify-center shadow-lg border-4 border-pink-300"
+              data-index="0"
+            >
+              <div class="card-content text-4xl md:text-6xl"></div>
+            </div>
+          </div>
+          <div
+            class="card-wrapper absolute"
+            style="left: 33.33%"
+            data-position="1"
+          >
+            <div
+              class="card w-24 h-36 md:w-40 md:h-56 bg-white rounded-2xl cursor-pointer transform transition-all hover:scale-105 flex items-center justify-center shadow-lg border-4 border-pink-300"
+              data-index="1"
+            >
+              <div class="card-content text-4xl md:text-6xl"></div>
+            </div>
+          </div>
+          <div
+            class="card-wrapper absolute"
+            style="left: 66.66%"
+            data-position="2"
+          >
+            <div
+              class="card w-24 h-36 md:w-40 md:h-56 bg-white rounded-2xl cursor-pointer transform transition-all hover:scale-105 flex items-center justify-center shadow-lg border-4 border-pink-300"
+              data-index="2"
+            >
+              <div class="card-content text-4xl md:text-6xl"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button
+            id="retry-button"
+            class="hidden bg-gradient-to-r from-pink-500 to-rose-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+          >
+            Intentar de Nuevo
+          </button>
+          <button
+            id="reveal-button"
+            class="hidden bg-gradient-to-r from-green-500 to-teal-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+          >
+            Ver Sorpresa
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="surprise-container"
+      class="hidden container mx-auto px-4 py-8 max-w-4xl"
+    >
+      <div
+        class="bg-pink-50 rounded-3xl shadow-2xl p-8 md:p-12 border-2 border-pink-200"
+      >
+        <div class="text-center mb-12">
+          <i class="ri-heart-fill text-red-500 text-6xl mb-4 animate-pulse"></i>
+          <h1
+            class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-600 mb-4"
+          >
+            ¡Felicidades mi amor!
+          </h1>
+        </div>
+
+        <div class="space-y-8">
+          <div class="flex items-start gap-4">
+            <i
+              class="ri-emotion-happy-fill text-yellow-500 text-3xl flex-shrink-0 mt-1"
+            ></i>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                Te veo sonreír
+              </h3>
+              <p class="text-gray-600 text-lg">
+                Y cada día está completo si te veo a tí sonreír, porque es tu
+                sonrisa la que hace que cada día se llene de color y sepa que te
+                sientes muy bien estando conmigo.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <i
+              class="ri-eye-fill text-blue-500 text-3xl flex-shrink-0 mt-1"
+            ></i>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-800 mb-2">Esos ojitos</h3>
+              <p class="text-gray-600 text-lg">
+                Esa mirada que tu tienes me tiene loquísimo, me hipnotiza, en
+                serio que me encanta verte, porque veo una luz llena de tanto
+                amor y sinceridad que se muestra a través de esos ojitos lindos.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <i
+              class="ri-heart-3-fill text-purple-500 text-3xl flex-shrink-0 mt-1"
+            ></i>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-800 mb-2">Tú corazón</h3>
+              <p class="text-gray-600 text-lg">
+                Con cada latido me demuestra que tienes un inmenso amor,
+                infinito, que nunca se acabará, un amor que es solo para mi, me
+                encanta poder sentir siempre ese corazón latiendo a cada
+                instante.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <i
+              class="ri-sparkling-fill text-blue-500 text-3xl flex-shrink-0 mt-1"
+            ></i>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-800 mb-2">Eres única</h3>
+              <p class="text-gray-600 text-lg">
+                Mi amor, que sepas que no hay nadie como tú, te lo digo siempre,
+                pero es que en serio eres irremplazable, eres la única persona,
+                la única mujer, la dueña única de mi corazón, de mis sueños, de
+                todo lo que soy, para ti es todo.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <i
+              class="ri-infinity-fill text-indigo-500 text-3xl flex-shrink-0 mt-1"
+            ></i>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-800 mb-2">Por siempre</h3>
+              <p class="text-gray-600 text-lg">
+                Mi amor yo quiero que este amor sea para siempre, sea eterno,
+                que podamos crecer juntos, y podamos acompañarnos siempre a cada
+                paso, quiero estar contgo y solamnete contigo porque sé que
+                viviré muy feliz porque eres el amor de mi vida. Te amo
+                muchísimo.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12 pt-8 border-t border-pink-200">
+          <p
+            class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-600"
+          >
+            Te amo con todo mi corazón
+          </p>
+          <i class="ri-heart-fill text-red-500 text-4xl mt-4 animate-pulse"></i>
+        </div>
+
+        <div class="mt-6 mb-8">
+          <div
+            class="bg-white rounded-2xl p-4 border-2 border-pink-300 overflow-hidden mx-auto"
+            style="max-width: 400px"
+          >
+            <div class="relative" style="aspect-ratio: 9/16">
+              <img
+                id="surprise-image"
+                src="foto-especial.jpg"
+                alt="Imagen especial"
+                class="w-full h-full rounded-xl object-cover cursor-pointer hover:opacity-90 transition-opacity"
+              />
+            </div>
+            <button
+              id="download-image-btn"
+              class="mt-4 w-full bg-gradient-to-r from-pink-500 to-rose-600 text-white px-6 py-3 rounded-full font-bold text-sm hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <i class="ri-download-2-line text-xl"></i>
+              Descargar Imagen
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
