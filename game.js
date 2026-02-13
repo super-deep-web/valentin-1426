@@ -52,6 +52,9 @@ function initRound() {
   canClick = false;
   isShuffling = false;
 
+  const cardWrappers = document.querySelectorAll(".card-wrapper");
+  const cards = document.querySelectorAll(".card");
+
   cardPositions = [0, 1, 2];
 
   cardWrappers.forEach((wrapper, index) => {
