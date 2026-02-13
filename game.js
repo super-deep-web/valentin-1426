@@ -4,8 +4,9 @@ let heartPosition = 0;
 let canClick = false;
 let isShuffling = false;
 
-const cardWrappers = document.querySelectorAll(".card-wrapper");
-const cards = document.querySelectorAll(".card");
+let cardWrappers;
+let cards;
+
 const livesContainer = document.getElementById("lives-container");
 const winsDisplay = document.getElementById("wins");
 const gameStatus = document.getElementById("game-status");
@@ -52,8 +53,8 @@ function initRound() {
   canClick = false;
   isShuffling = false;
 
-  const cardWrappers = document.querySelectorAll(".card-wrapper");
-  const cards = document.querySelectorAll(".card");
+  cardWrappers = document.querySelectorAll(".card-wrapper");
+  cards = document.querySelectorAll(".card");
 
   cardPositions = [0, 1, 2];
 
@@ -208,9 +209,14 @@ function revealSurprise() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-cards.forEach((card) => {
-  card.addEventListener("click", handleCardClick);
-});
+function setupCardListeners() {
+  const allCards = document.querySelectorAll(".card");
+  allCards.forEach((card) => {
+    card.addEventListener("click", handleCardClick);
+  });
+}
+
+setupCardListeners();
 
 welcomeStartButton.addEventListener("click", startGame);
 retryButton.addEventListener("click", startGame);
