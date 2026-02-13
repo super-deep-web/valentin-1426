@@ -190,9 +190,13 @@ function startGame() {
   updateLivesDisplay();
   winsDisplay.textContent = wins;
   retryButton.classList.add("hidden");
+  revealButton.classList.add("hidden");
   welcomeContainer.classList.add("hidden");
   gameContainer.classList.remove("hidden");
-  initRound();
+
+  setTimeout(() => {
+    initRound();
+  }, 100);
 }
 
 function revealSurprise() {
